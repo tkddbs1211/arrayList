@@ -25,7 +25,7 @@ int main()
 	insertArrayList(myArrayList, 1, item);
 	insertArrayList(myArrayList, 2, item);
 	insertArrayList(myArrayList, 3, item);
-	insertArrayList(myArrayList, 4, item);
+	insertArrayList(myArrayList, 4, item);//realloc test
 
 
 	printArrayList(myArrayList);

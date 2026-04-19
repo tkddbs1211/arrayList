@@ -4,47 +4,47 @@
 #include "arrayList.h"
 
 arrayList* createArrayList(int count) {
-	arrayList* al; //arrayList를 가르키는 al생성
-	al = (arrayList*)malloc(sizeof(arrayList));//al을 만들 메모리를 arrayList만큼 할당받음
+	arrayList* al;
+	al = (arrayList*)malloc(sizeof(arrayList));
 
-	al->data = (elementArrayList*)malloc(  //al->data al안에있는 data에다가 넣어라 (arrayList에 있는 data에 넣어라)
-		sizeof(elementArrayList) * count); //elementArrayList를 * size만큼 할당 , size만큼 x행y열 z값 저장 가능.
-	al->size = 0; //size 0으로 초기화 
-	al->capacity = count; // al-> capacity >>최대개수=count 
+	al->data = (elementArrayList*)malloc(  
+		sizeof(elementArrayList) * count); 
+	al->size = 0;
+	al->capacity = count;
 
 	return al;
 }
 
 void destroyArrayList(arrayList* al) {
-	free(al->data); //malloc 이후엔 다시 free()해줘야함. data 먼저 하고
-	free(al);      //그 다음에 al해줌
+	free(al->data); 
+	free(al);      
 }
 
 int isEmptyArrayList(arrayList* al) {
 	if (al->size == 0) {
-		return 1;                //size가 0이면 참 즉, row col value가 하나도 없으면 1 리턴
+		return 1;                
 	}
 	else {
-		return 0;            //아니면 0 리턴
+		return 0;           
 	}
 }
 
 int isFullArrayList(arrayList* al) {
-	if (al->size == al->capacity) { //size가 capacity 최대 용량과 같으면 참 1 리턴하기
+	if (al->size == al->capacity) { 
 		return 1;
 	}
 	else {
-		return 0; //아니면 0 리턴
+		return 0;
 	}
 }
 
 int sizeArrayList(arrayList* al) {   
-	return al->size;  //al에 저장된 원소 개수 반환 , size 만큼 row col value 있기에 al -> size 리턴
+	return al->size; 
 }
 
 int insertArrayList(arrayList* al,
 	int pos, elementArrayList item) {
-	if (pos < 0 || pos > al->size) { //pos가 0보다 작거나 size보다 크면 return 0;
+	if (pos < 0 || pos > al->size) { 
 		return 0;
 	}
 
@@ -62,56 +62,56 @@ int insertArrayList(arrayList* al,
 		}
 	}
 
-	for (int i = al->size-1; i >= pos; i--) {  //넣고싶은 자리에 수를 넣으려면, 기존 숫자들을 뒤로 한칸씩 밀어내야함.
-		al->data[i + 1] = al->data[i];        //앞에서부터 밀면 뒤에수를 덮어써버림 따라서 뒤에서부터
-	}										//이러면 pos자리가 비게 됨. -1이 없었음*******
+	for (int i = al->size-1; i >= pos; i--) {  
+		al->data[i + 1] = al->data[i];        
+	}										 
 
-	al->data[pos] = item;    //data[pos]자리에 item 추가함
-	al->size++;				//데어터 하나 늘어났으니 size++
+	al->data[pos] = item;    
+	al->size++;				
 	 
-	return 1;				//정상 종료
+	return 1;				
 }
 
 elementArrayList deleteArrayList(
 	arrayList* al, int pos) {
 	if (pos < 0 || pos > al->size - 1) {
-		printf("error");					//error출력*******
+		printf("error");					
 	}
 
 	elementArrayList item = al->data[pos];
-												//pos위치를 덮어쓰기위한 for문
-	for (int i = pos; i < al->size - 1; i++) { //data[i+1]을 data[i]에 덮어쓰기. 결국 data[i]가 pos덮어씀.
+												
+	for (int i = pos; i < al->size - 1; i++) { 
 		al->data[i] = al->data[i + 1];
 	}
 
-	al->size--;  //size 하나 줄이기 
+	al->size--; 
 
-	return item; //item을 return해서 item이 무슨 값이었는지 저장.
+	return item; 
 }
 
 void initArrayList(arrayList* al) {
 
-	if (al == NULL)return; //al에 아무것도 없다면, 나가기*******
+	if (al == NULL)return; 
 
-	for (int i = al->size - 1; i >= 0; i--) { //deleteArrayList(al,pos)>>pos자리 지우기 위함 전체 지우려면,
-		deleteArrayList(al, i);				//pos 자리에 i 두고 size-1부터 --
+	for (int i = al->size - 1; i >= 0; i--) { 
+		deleteArrayList(al, i);				
 	}
 }
 
 elementArrayList getItemArrayList(
 	arrayList* al, int pos) {
-	return al->data[pos];//data에 pos의 원소를 반환
+	return al->data[pos];
 }
 
 int replaceItemArrayList(arrayList* al,
 	int pos, elementArrayList item) {
-	if (pos < 0 || pos > al->size - 1) { //pos가 0보다 작거나 size-1보다 크면 return 0
+	if (pos < 0 || pos > al->size - 1) { 
 		return 0;
 	}
 
-	al->data[pos] = item; //data의 pos 위치에 item넣기
+	al->data[pos] = item; 
 
-	return 1; //정상 종료
+	return 1;
 }
 
 void printArrayList(arrayList* al) {

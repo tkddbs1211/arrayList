@@ -3,14 +3,14 @@
 
 #include "arrayList.h"
 
-arrayList* createArrayList(int count) {
+arrayList* createArrayList(int size) {
 	arrayList* al;
 	al = (arrayList*)malloc(sizeof(arrayList));
 
 	al->data = (elementArrayList*)malloc(  
-		sizeof(elementArrayList) * count); 
+		sizeof(elementArrayList) * size); 
 	al->size = 0;
-	al->capacity = count;
+	al->capacity = size;
 
 	return al;
 }
